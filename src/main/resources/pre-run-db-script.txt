@@ -1,0 +1,59 @@
+CREATE SEQUENCE POC_HEALTH_PORTAL_SERVICE_SEQ START WITH 1 INCREMENT BY 1 NOCYCLE;
+
+CREATE TABLE POC_MEDICAL_HISTORY_QUESTIONS
+   (	ID NUMBER(10,0) NOT NULL, 
+    question VARCHAR2(255) NOT NULL,
+	 PRIMARY KEY ("ID"));	 
+
+CREATE TABLE POC_MEDICAL_HISTORY_OPTIONS
+   (	ID NUMBER(10,0) NOT NULL, 
+    options VARCHAR2(25)  NOT NULL,
+	 PRIMARY KEY ("ID"));
+
+CREATE TABLE POC_MEDICAL_HISTORY_PATIENT_INFO
+   (	ID NUMBER(10,0) NOT NULL, 
+    patient_email VARCHAR2(100) NOT NULL,
+	MEDICAL_HISTORY_question_id NUMBER(10,0) NOT NULL,
+	MEDICAL_HISTORY_option_id NUMBER(10,2) NOT NULL,
+	create_date DATE NOT NULL,
+	 PRIMARY KEY ("ID"));
+ALTER TABLE POC_MEDICAL_HISTORY_PATIENT_INFO ADD FOREIGN KEY (MEDICAL_HISTORY_question_id) REFERENCES POC_MEDICAL_HISTORY_QUESTIONS(ID);
+ALTER TABLE POC_MEDICAL_HISTORY_PATIENT_INFO ADD FOREIGN KEY (MEDICAL_HISTORY_option_id) REFERENCES POC_MEDICAL_HISTORY_OPTIONS(ID);
+
+CREATE TABLE POC_MEDICAL_HISTORY_PATIENT_ASSESSMENT
+   (	ID NUMBER(10,0) NOT NULL, 
+    patient_email VARCHAR2(100) NOT NULL,
+    stage VARCHAR2(25) NOT NULL,
+	assessment VARCHAR2(1000) NOT NULL,
+	recommendations  VARCHAR2(1000),
+	create_date DATE NOT NULL,
+	 PRIMARY KEY ("ID"));
+
+INSERT INTO POC_MEDICAL_HISTORY_QUESTIONS (ID,question) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'Have you noticed a slight shaking or tremor in your finger, thumb, hand or chin?');
+INSERT INTO POC_MEDICAL_HISTORY_QUESTIONS (ID,question) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'Has your handwriting gotten much smaller than it was in the past?');
+INSERT INTO POC_MEDICAL_HISTORY_QUESTIONS (ID,question) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'Have you noticed you no longer smell certain foods very well?');
+INSERT INTO POC_MEDICAL_HISTORY_QUESTIONS (ID,question) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'Do you thrash around in bed or act out dreams when you are deeply asleep?');
+INSERT INTO POC_MEDICAL_HISTORY_QUESTIONS (ID,question) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'Do you feel stiff in your body, arms or legs?Have others noticed that your arms don’t swing like they used to when you walk?');
+INSERT INTO POC_MEDICAL_HISTORY_QUESTIONS (ID,question) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'Do you have trouble moving your bowels without straining every day?');
+INSERT INTO POC_MEDICAL_HISTORY_QUESTIONS (ID,question) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'Have other people told you that your voice is very soft or that you sound breathy and/or hoarse?');
+INSERT INTO POC_MEDICAL_HISTORY_QUESTIONS (ID,question) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'Have you been told that you have a serious, depressed or mad look on your face, even when you are not in a bad mood?');
+INSERT INTO POC_MEDICAL_HISTORY_QUESTIONS (ID,question) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'Do you notice that you often feel dizzy when you stand up out of a chair?');
+INSERT INTO POC_MEDICAL_HISTORY_QUESTIONS (ID,question) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'Are you not standing up as straight as you used to?');
+
+INSERT INTO POC_MEDICAL_HISTORY_OPTIONS (ID,options) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'Yes');
+INSERT INTO POC_MEDICAL_HISTORY_OPTIONS (ID,options) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'No');
+INSERT INTO POC_MEDICAL_HISTORY_OPTIONS (ID,options) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'Not sure');
+
+CREATE TABLE POC_PATIENT_CONFIG
+   (	ID NUMBER(10,0) NOT NULL, 
+    type VARCHAR2(25) NOT NULL,
+    Key VARCHAR2(50) NOT NULL,
+	value VARCHAR2(255) NOT NULL,
+	 PRIMARY KEY ("ID"));
+	 
+INSERT INTO POC_PATIENT_CONFIG (ID,type,key,value) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'Resource','About PD','https://www.michaeljfox.org/resources-people-newly-diagnosed-parkinsons?smcid=bg-a1bHq00000AbgZn&gclid=aad732be419b16a12edd57fe288eb4f6&gclsrc=3p.ds&msclkid=aad732be419b16a12edd57fe288eb4f6');
+INSERT INTO POC_PATIENT_CONFIG (ID,type,key,value) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'Support Group','Helpline specialists','1-800-4PD-INFO (473-4636)');
+INSERT INTO POC_PATIENT_CONFIG (ID,type,key,value) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'Resource','Order a Hospital Safety Kit','https://secure3.convio.net/prkorg/site/Ecommerce/1306509339?VIEW_PRODUCT=true&product_id=1361&store_id=4003&_gl=1*1dvutw1*_ga*Njg1ODIxNTM3LjE2OTg3MDM5MjM.*_ga_57LEHWK3JX*MTY5ODcyMDE0OS4yLjAuMTY5ODcyMDE0OS4wLjAuMA..&_ga=2.214662676.207911570.1698703923-685821537.1698703923');
+INSERT INTO POC_PATIENT_CONFIG (ID,type,key,value) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'Support Group','Medical Emergency','911');
+INSERT INTO POC_PATIENT_CONFIG (ID,type,key,value) VALUES (POC_HEALTH_PORTAL_SERVICE_SEQ.nextval,'Support Group','Depression','1-800-4PD-INFO (473-4636)');
+
