@@ -13,7 +13,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RequestMapping("/api/patient-recommendations")
 @RestController
-@Tag(name = "Controller to get Patient Recommendations")
+@Tag(name = "Controller - As a Patient, I want to receive personalized recommendations for lifestyle changes and"
+		+ " preventive measures based on my risk assessement to reduce the chances of developing Pakinson's disease.")
 public class PatientRecommendationsController {
 
 	@Autowired
