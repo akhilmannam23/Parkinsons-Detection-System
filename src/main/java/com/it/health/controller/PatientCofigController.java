@@ -15,7 +15,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RequestMapping("/api/patient-config")
 @RestController
-@Tag(name = "Controller to get Patient Cofig etc..")
+@Tag(name = "Controller - As a patient, I want application to provide me with resources and support groups for "
+		+ "individuals living with Parkinson's disease if I receive a high risk assessment")
 public class PatientCofigController {
 
 	@Autowired
